@@ -1,0 +1,16 @@
+{
+  "objective": "Test 20-day sector-neutral momentum robustness.",
+  "asset_class": "equities",
+  "universe": "Top 50 liquid US equities",
+  "research_period": "2015-01-01/2025-12-31",
+  "rebalance": "weekly",
+  "constraints": {
+    "sector_neutral": true,
+    "max_position_weight": 0.05
+  },
+  "required_output": [
+    "research",
+    "quantconnect"
+  ],
+  "live_authority": false
+}

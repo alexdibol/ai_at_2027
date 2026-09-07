@@ -1,0 +1,14 @@
+{
+  "strategy_name": "",
+  "research_signal_rule": "",
+  "signal_lag": "",
+  "rebalance_frequency": "",
+  "universe": "",
+  "resolution": "",
+  "normalization": "",
+  "warmup": "",
+  "portfolio_constraints": {},
+  "fee_model": "",
+  "slippage_model": "",
+  "risk_limits": {}
+}

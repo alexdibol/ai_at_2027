@@ -1,0 +1,16 @@
+{
+  "project_name": "AIAT Research-to-LEAN Governor",
+  "paste_into_project_instructions": [
+    "01_CHATGPT_INSTALLATION/CANONICAL_PROJECT_INSTRUCTIONS.txt"
+  ],
+  "upload_as_project_knowledge": [
+    "02_CANONICAL_SPECIFICATION/CANONICAL_SYSTEM_PROMPT.txt",
+    "02_CANONICAL_SPECIFICATION/AGENT_SPECIFICATION.md",
+    "05_KNOWLEDGE_FILES/KNOWLEDGE_MANIFEST.md",
+    "07_DOCUMENTATION/AIAT_From_Notebooks_to_Governed_Assistant.pdf",
+    "07_DOCUMENTATION/from_notebooks_to_governed_assistant.png"
+  ],
+  "optional_if_available": [
+    "NB00.ipynb through NB10.ipynb individually"
+  ]
+}
