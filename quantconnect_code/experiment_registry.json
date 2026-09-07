@@ -1,0 +1,18 @@
+{
+  "experiments": [
+    {
+      "deployment_authorized": false,
+      "experiment_id": "NB07-QC-EXP-001",
+      "live_trading_authorized": false,
+      "platform_backtest_status": "NOT_RUN",
+      "platform_compile_status": "NOT_RUN",
+      "project_hash": "252387a3ae9718469bb8bac5666370959c0d30111ae3e8618909d10def712583",
+      "promotion_view": "HUMAN_REVIEW_REQUIRED",
+      "research_only": true,
+      "status": "READY_FOR_QUANTCONNECT_BACKTEST",
+      "strategy_spec_hash": "c38f3f99e26bd70d857975abeec9bb9981cd63d65c5c46c5c721b6d6217574b0"
+    }
+  ],
+  "registry_hash": "86b50c548dab0f3cc8ece74c132aa9d9b644e6819e22b66f6ef7a37368785748",
+  "registry_version": "2.0"
+}

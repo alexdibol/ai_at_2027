@@ -1,0 +1,25 @@
+{
+  "checks": {
+    "audit_object_store": true,
+    "champion_selection": true,
+    "corporate_actions": true,
+    "cost_models": true,
+    "deployment_denied": true,
+    "human_promotion_only": true,
+    "independent_risk": true,
+    "live_authority_denied": true,
+    "live_mode_hard_denial": true,
+    "no_llm_inside_lean_runtime": true,
+    "python_syntax": true,
+    "strategy_spec_37_field_contract": true,
+    "unique_universe": true,
+    "universe_size_30": true
+  },
+  "notebook": "NB07",
+  "passed": true,
+  "platform_backtest_status": "NOT_RUN",
+  "platform_compile_status": "NOT_RUN",
+  "project_hash": "252387a3ae9718469bb8bac5666370959c0d30111ae3e8618909d10def712583",
+  "strategy_spec_hash": "c38f3f99e26bd70d857975abeec9bb9981cd63d65c5c46c5c721b6d6217574b0",
+  "version": "2.0.0-research"
+}

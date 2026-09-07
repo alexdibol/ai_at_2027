@@ -1,0 +1,155 @@
+{
+  "asset_class": "US_EQUITIES",
+  "benchmark": "SPY",
+  "calendar": "US_EQUITY",
+  "champion_selection_rule": "highest chronological validation balanced accuracy; tie-break by predefined complexity rank",
+  "corporate_action_policy": "observe dividends and splits as point-in-time events; apply two-day eligibility cool-down; never use future event knowledge",
+  "cost_model": {
+    "fee_usd_per_order": 0.0,
+    "type": "ConstantFeeModel"
+  },
+  "data_normalization": "ADJUSTED",
+  "deployment_authorized": false,
+  "end_date": "2025-12-31",
+  "expected_outputs": [
+    "model_diagnostics",
+    "champion",
+    "orders",
+    "fills",
+    "portfolio_state",
+    "risk_report",
+    "corporate_action_events",
+    "audit_bundle"
+  ],
+  "feature_contract": [
+    "ret_1",
+    "mom_5",
+    "mom_20",
+    "vol_20",
+    "vol_60",
+    "volume_z20",
+    "dollar_volume_z20",
+    "ma_ratio_20",
+    "ma_ratio_50"
+  ],
+  "known_limitations": [
+    "static teaching universe may contain survivorship bias",
+    "single-process risk separation is logical rather than service-level",
+    "QuantConnect cloud compilation and matched-data results must be run on platform",
+    "backtest results do not authorize deployment or live trading"
+  ],
+  "label_horizon": 1,
+  "live_trading_authorized": false,
+  "model_families": [
+    "logistic_regression",
+    "knn",
+    "random_forest",
+    "mlp",
+    "linear_regression"
+  ],
+  "portfolio_method": "inverse_volatility",
+  "position_rule": "top 20 percent long; bottom 20 percent short; event-cooldown exclusions",
+  "promotion_view": "HUMAN_REVIEW_REQUIRED",
+  "rebalance_rule": "MONTH_START_AFTER_OPEN",
+  "research_only": true,
+  "research_question": "Evaluate whether a cross-sectional, event-aware equity strategy can produce robust risk-adjusted performance across sectors under QuantConnect/LEAN.",
+  "resolution": "DAILY",
+  "risk_limits": {
+    "max_gross": 1.0,
+    "max_portfolio_drawdown": 0.12,
+    "max_position_weight": 0.1,
+    "max_sector_gross": 0.35
+  },
+  "seed": 20260906,
+  "signal_rule": "cross-sectional ranking of champion model score",
+  "slippage_model": {
+    "price_impact": 0.1,
+    "type": "VolumeShareSlippageModel",
+    "volume_limit": 0.025
+  },
+  "start_date": "2021-01-01",
+  "starting_cash": 1000000,
+  "strategy_id": "NB07_QC_GOVERNED_MULTI_MODEL_V2",
+  "timezone": "America/New_York",
+  "training_lookback_bars": 320,
+  "training_schedule": "MONTH_START_BEFORE_OPEN",
+  "universe": [
+    "AAPL",
+    "MSFT",
+    "NVDA",
+    "AVGO",
+    "ORCL",
+    "JPM",
+    "BAC",
+    "GS",
+    "MS",
+    "C",
+    "JNJ",
+    "UNH",
+    "LLY",
+    "MRK",
+    "ABBV",
+    "CAT",
+    "GE",
+    "HON",
+    "UPS",
+    "RTX",
+    "AMZN",
+    "WMT",
+    "COST",
+    "MCD",
+    "HD",
+    "XOM",
+    "CVX",
+    "COP",
+    "SLB",
+    "EOG"
+  ],
+  "universe_groups": {
+    "Consumer": [
+      "AMZN",
+      "WMT",
+      "COST",
+      "MCD",
+      "HD"
+    ],
+    "Energy": [
+      "XOM",
+      "CVX",
+      "COP",
+      "SLB",
+      "EOG"
+    ],
+    "Financials": [
+      "JPM",
+      "BAC",
+      "GS",
+      "MS",
+      "C"
+    ],
+    "Healthcare": [
+      "JNJ",
+      "UNH",
+      "LLY",
+      "MRK",
+      "ABBV"
+    ],
+    "Industrials": [
+      "CAT",
+      "GE",
+      "HON",
+      "UPS",
+      "RTX"
+    ],
+    "Technology": [
+      "AAPL",
+      "MSFT",
+      "NVDA",
+      "AVGO",
+      "ORCL"
+    ]
+  },
+  "universe_mode": "STATIC_TEACHING_FIXTURE",
+  "version": "2.0.0-research",
+  "warmup_bars": 80
+}

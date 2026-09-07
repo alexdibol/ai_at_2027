@@ -1,0 +1,42 @@
+{
+  "compare_with_tolerance_after_platform_run": {
+    "drawdown": "must reflect LEAN portfolio accounting",
+    "equity_curve": "must be reconciled, not assumed identical",
+    "security_eligibility": "same event-cooldown rule",
+    "signal_dates": "same rebalance schedule after warm-up",
+    "transaction_costs": "LEAN reality models govern platform values",
+    "turnover": "platform fills may differ from vectorized approximation"
+  },
+  "must_match": {
+    "feature_contract": [
+      "ret_1",
+      "mom_5",
+      "mom_20",
+      "vol_20",
+      "vol_60",
+      "volume_z20",
+      "dollar_volume_z20",
+      "ma_ratio_20",
+      "ma_ratio_50"
+    ],
+    "live_trading_authorized": false,
+    "max_gross": 1.0,
+    "max_position_weight": 0.1,
+    "model_families": [
+      "logistic_regression",
+      "knn",
+      "random_forest",
+      "mlp",
+      "linear_regression"
+    ],
+    "portfolio_method": "inverse_volatility",
+    "universe_size": 30
+  },
+  "platform_only_evidence": [
+    "QuantConnect compilation result",
+    "LEAN runtime logs",
+    "order tickets and fills",
+    "backtest statistics",
+    "Object Store audit artifact"
+  ]
+}
