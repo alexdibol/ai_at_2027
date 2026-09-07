@@ -1,1 +1,269 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autonomous Algorithmic Trading | Alejandro Reynoso</title>
+<meta name="description" content="From 400+ engineering tasks to an autonomous quantitative research architecture. Explore the book, 13 notebooks, QuantConnect bridge, and governed AI assistant.">
+<meta name="author" content="Alejandro Reynoso"><meta name="theme-color" content="#071d35">
+<meta property="og:type" content="website"><meta property="og:title" content="AIAT · Autonomous Algorithmic Trading"><meta property="og:description" content="Four essential texts. Thirteen notebooks. One journey from first principles to governed autonomy."><meta name="twitter:card" content="summary">
+<style>
+    :root{
+      --ink:#152231;
+      --navy:#071d35;
+      --deep:#041426;
+      --paper:#f7f5ef;
+      --white:#fff;
+      --gold:#c9a34c;
+      --gold-dark:#8a6b27;
+      --gold-soft:#e7d49a;
+      --mist:#edf2f5;
+      --muted:#607080;
+      --line:#d9d5ca;
+      --max:1240px;
+    }
 
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:88px}
+    body{
+      margin:0;
+      background:var(--paper);
+      color:var(--ink);
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      line-height:1.65;
+    }
+    a{color:inherit;text-decoration:none}
+    button,a{transition:color .2s,background .2s,border-color .2s,transform .2s}
+    a:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+    .page{width:min(var(--max),calc(100% - 48px));margin:auto}
+    .serif,h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:500;line-height:1.03}
+    .skip-link{position:absolute;left:-9999px;top:auto}
+    .skip-link:focus{left:18px;top:18px;z-index:100;background:var(--gold);color:var(--deep);padding:12px 16px;font-weight:800}
+
+    .topbar{
+      background:var(--deep);
+      color:white;
+      position:sticky;
+      top:0;
+      z-index:20;
+      border-bottom:1px solid rgba(255,255,255,.12);
+    }
+    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:13px;font-size:.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+    .brand-mark{width:39px;height:39px;border:1px solid var(--gold);display:grid;place-items:center;color:var(--gold);font-family:Georgia,serif;font-size:1.1rem}
+    .nav-links{display:flex;align-items:center;gap:28px;font-size:.82rem;font-weight:700}
+    .nav-links a:hover{color:var(--gold)}
+
+    .hero{background:var(--navy);color:white;overflow:hidden}
+    .hero-grid{min-height:720px;display:grid;grid-template-columns:1.4fr .75fr;gap:80px;align-items:center;padding:98px 0 84px}
+    .eyebrow,.kicker{margin:0 0 20px;color:var(--gold);font-size:.76rem;font-weight:850;letter-spacing:.18em;text-transform:uppercase}
+    .hero h1{font-size:clamp(3.6rem,7.2vw,7.3rem);letter-spacing:-.055em;margin:0;max-width:950px}
+    .hero h1 em{color:var(--gold);font-style:normal}
+    .hero-lead{font-family:Georgia,serif;font-size:clamp(1.3rem,2vw,1.85rem);line-height:1.35;max-width:850px;color:#e5edf3;margin:30px 0 16px}
+    .hero-body{max-width:780px;color:#b9c7d2;font-size:1.03rem}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+    .button{display:inline-flex;gap:18px;align-items:center;justify-content:center;padding:15px 21px;border:1px solid transparent;font-size:.82rem;font-weight:800;letter-spacing:.02em}
+    .button.primary{background:var(--gold);color:var(--navy)}
+    .button.secondary{border-color:rgba(255,255,255,.36);color:white}
+    .button:hover{transform:translateY(-2px)}
+    .button.primary:hover{background:var(--gold-soft)}
+    .button.secondary:hover{border-color:var(--gold);color:var(--gold-soft)}
+    .hero-panel{position:relative;background:var(--paper);color:var(--ink);padding:42px 34px 34px;min-height:430px;box-shadow:24px 24px 0 rgba(0,0,0,.16)}
+    .hero-panel:before{content:"GT";position:absolute;right:22px;top:14px;font-family:Georgia,serif;font-size:7rem;color:rgba(201,163,76,.12);line-height:1}
+    .panel-kicker{color:var(--gold);text-transform:uppercase;font-size:.7rem;letter-spacing:.14em;font-weight:850}
+    .hero-panel h2{font-size:2.45rem;margin:38px 0 34px}
+    .stats{border-top:1px solid var(--line)}
+    .stats div{display:flex;align-items:center;gap:18px;padding:16px 0;border-bottom:1px solid var(--line)}
+    .stats strong{font:500 2rem Georgia;color:var(--gold);min-width:48px}
+    .stats span{font-size:.82rem;font-weight:750}
+    .hero-index{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(255,255,255,.16)}
+    .hero-index a{padding:21px 14px;border-right:1px solid rgba(255,255,255,.16);font-size:.72rem;color:#cad7e0}
+    .hero-index a:hover{background:rgba(255,255,255,.04);color:white}
+    .hero-index span{display:block;color:var(--gold);font-weight:900;margin-bottom:5px}
+
+    .section{padding:110px 0}
+    .split{display:grid;grid-template-columns:1.05fr .95fr;gap:80px;align-items:start}
+    .section h2{font-size:clamp(2.7rem,5vw,5.2rem);letter-spacing:-.045em;margin:0}
+    .intro{font-size:1.17rem;color:#33465a;margin:5px 0 0}
+    .principles{display:grid;grid-template-columns:repeat(4,1fr);margin-top:72px;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+    .principles article{padding:30px 24px 34px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .number{color:var(--gold);font-size:.75rem;font-weight:900}
+    .principles h3{font-size:1.5rem;margin:42px 0 14px}
+    .principles p{font-size:.91rem;color:var(--muted);margin:0}
+
+    .roadmap{background:var(--deep);color:white;padding:110px 0}
+    .roadmap-head{display:grid;grid-template-columns:1fr .7fr;gap:80px;margin-bottom:60px}
+    .roadmap h2{font-size:clamp(3rem,5vw,5.4rem);margin:0}
+    .roadmap-head>p{color:#b9c7d2;font-size:1.1rem}
+    .stages{display:grid;gap:14px}
+    .stage{display:grid;grid-template-columns:105px 1fr 1fr 42px;background:#f6f3ea;color:var(--ink);min-height:160px;transition:.2s}
+    .stage:hover{transform:translateX(7px);background:white}
+    .stage-no{background:var(--gold);color:var(--navy);padding:28px 20px;font:500 2.2rem Georgia}
+    .stage-main,.stage-outcome{padding:25px 30px}
+    .stage-label{text-transform:uppercase;letter-spacing:.12em;color:var(--gold-dark);font-size:.68rem;font-weight:900}
+    .stage h3{font-size:1.75rem;margin:8px 0}
+    .stage-main p,.stage-outcome p{margin:0;color:#485a6c;font-size:.88rem}
+    .stage-outcome{border-left:1px solid var(--line)}
+    .stage-outcome strong{font-size:.74rem;text-transform:uppercase;letter-spacing:.09em}
+    .arrow{display:grid;place-items:center;font-size:1.4rem;color:var(--gold-dark)}
+
+    .resources{background:var(--mist)}
+    .resource-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:60px}
+    .resource{background:white;padding:40px;min-height:390px;display:flex;flex-direction:column;align-items:flex-start}
+    .resource.dark{background:var(--navy);color:white}
+    .resource .tag{color:var(--gold-dark);text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;font-weight:900}
+    .resource.dark .tag{color:var(--gold)}
+    .resource h3{font-size:2.35rem;margin:25px 0 16px}
+    .resource p{color:var(--muted);max-width:560px}
+    .resource.dark p{color:#b9c7d2}
+    .resource .button{margin-top:auto;background:var(--gold);color:var(--navy)}
+    .resource .meta{margin:0 0 18px;color:var(--gold-dark);font-size:.72rem;font-weight:850;letter-spacing:.08em;text-transform:uppercase}
+    .resource.dark .meta{color:var(--gold-soft)}
+    .resource.featured{grid-column:1/-1;display:grid;grid-template-columns:.65fr 1.35fr;gap:60px;min-height:0}
+    .resource.featured h3{margin-top:0}
+
+    .labs{background:var(--paper)}
+    .lab-group{margin-top:64px}
+    .lab-group-head{display:grid;grid-template-columns:140px 1fr;gap:28px;align-items:start;padding:0 0 20px;border-bottom:1px solid var(--line)}
+    .lab-group-head span{color:var(--gold-dark);font-size:.73rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+    .lab-group-head h3{font-size:2rem;margin:0}
+    .lab-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:22px}
+    .lab-card{display:grid;grid-template-columns:70px 1fr;align-items:start;background:white;border:1px solid var(--line);padding:26px;transition:.2s;min-height:235px}
+    .lab-card:hover{transform:translateY(-3px);border-color:var(--gold)}
+    .lab-number{font:500 1.7rem Georgia;color:var(--gold)}
+    .lab-card h3{font-size:1.35rem;line-height:1.15;margin:0 0 8px}
+    .lab-card p{font-size:.84rem;color:var(--muted);margin:0 0 18px}
+    .lab-role{display:block;color:var(--gold-dark);font-size:.68rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+    .lab-links{display:flex;flex-wrap:wrap;gap:16px;margin-top:auto}
+    .lab-links a{font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);border-bottom:1px solid var(--gold)}
+    .lab-links a:hover{color:var(--gold-dark)}
+
+    .framework{background:var(--navy);color:white}
+    .framework-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:90px;align-items:start}
+    .framework h2{font-size:clamp(3rem,5vw,5.5rem);margin:0}
+    .framework blockquote{font:500 1.55rem/1.5 Georgia;margin:0;padding-left:30px;border-left:2px solid white}
+    .duties{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:42px}
+    .duty{border-top:1px solid rgba(255,255,255,.5);padding-top:15px}
+    .duty strong{display:block;font-size:.87rem;margin-bottom:7px}
+    .duty span{font-size:.84rem;color:var(--gold-soft)}
+
+    .experience{background:var(--paper)}
+    .cycle{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:60px}
+    .cycle article{position:relative;background:white;border-right:1px solid var(--line);padding:34px 28px;min-height:245px}
+    .cycle span{color:var(--gold-dark);font-weight:900}
+    .cycle h3{font-size:2rem;margin:48px 0 12px}
+    .cycle p{font-size:.9rem;color:var(--muted)}
+
+    .author{background:var(--navy);color:white}
+    .author-grid{display:grid;grid-template-columns:220px 1fr;gap:75px;align-items:center}
+    .author-mark{width:200px;height:200px;border:1px solid rgba(255,255,255,.35);display:grid;place-items:center;position:relative}
+    .author-mark:after{content:"";position:absolute;width:130px;height:130px;border:1px solid var(--gold);border-radius:50%}
+    .author-mark span{font:500 3rem Georgia;z-index:1}
+    .author h2{font-size:clamp(2.8rem,5vw,5rem);margin:0 0 24px}
+    .author p{color:#b9c7d2;max-width:850px;font-size:1.05rem}
+    .author .disclosure{margin-top:28px;padding-top:22px;border-top:1px solid rgba(255,255,255,.2);font-size:.86rem;color:var(--gold-soft)}
+
+    .footer{background:var(--deep);color:#91a3b2;padding:40px 0;font-size:.78rem}
+    .footer-grid{display:grid;grid-template-columns:1fr auto;gap:30px}
+    .footer strong{color:white}
+    .footer a{color:white;margin-left:22px}
+    .footer a:hover{color:var(--gold)}
+
+    @media(max-width:900px){
+      .nav-links{display:none}
+      .hero-grid,.split,.roadmap-head,.framework-grid,.author-grid,.resource.featured{grid-template-columns:1fr}
+      .hero-grid{padding:70px 0;gap:45px}
+      .hero-index{grid-template-columns:1fr 1fr}
+      .principles,.cycle{grid-template-columns:1fr 1fr}
+      .stage{grid-template-columns:68px 1fr 34px}
+      .stage-outcome{display:none}
+      .resource-grid,.lab-grid{grid-template-columns:1fr}
+      .resource.featured{grid-column:auto;gap:20px}
+      .author-mark{width:150px;height:150px}
+      .duties{grid-template-columns:1fr}
+    }
+
+    @media(max-width:560px){
+      .page{width:min(100% - 28px,var(--max))}
+      .hero h1{font-size:3.3rem}
+      .hero-index,.principles,.cycle{grid-template-columns:1fr}
+      .section,.roadmap{padding:78px 0}
+      .stage{grid-template-columns:52px 1fr 28px}
+      .stage-no{padding:22px 10px;font-size:1.4rem}
+      .stage-main{padding:20px}
+      .resource{padding:30px;min-height:360px}
+      .resource h3{font-size:2rem}
+      .lab-group-head{grid-template-columns:1fr;gap:8px}
+      .lab-card{grid-template-columns:48px 1fr;padding:21px;min-height:0}
+      .footer-grid{grid-template-columns:1fr}
+      .footer a{margin:0 16px 0 0}
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*:before,*:after{transition:none!important}
+    }
+  
+.hero-panel:before{content:"AIAT";font-size:5rem}.hero-grid{grid-template-columns:1.35fr .8fr;gap:65px}.hero h1{font-size:clamp(3.3rem,6.6vw,6.6rem)}
+.kicker,.number,.lab-number{color:var(--gold-dark)}.hero .eyebrow,.roadmap .kicker,.framework .kicker,.author .kicker{color:var(--gold)}
+.nav-links{gap:22px}.nav-links a{font-size:.875rem}.panel-kicker{color:var(--gold-dark)}
+.hero-index a{font-size:.875rem}.stats span{font-size:.9rem}.principles p,.stage-main p,.stage-outcome p,.lab-card p,.duty span,.cycle p{font-size:1rem}
+.lab-links a,.button{font-size:.875rem}.lab-card{grid-template-columns:85px 1fr;min-height:245px}.lab-number{font-size:1.4rem}.lab-card h3{font-size:1.55rem}
+.stage-label,.resource .tag,.resource .meta,.lab-role,.lab-group-head span{font-size:.8rem}.stage-outcome strong{font-size:.85rem}.resource{min-height:430px}
+.resource h3{line-height:1.12}.resource p{margin-bottom:24px}.resource .button{margin-top:auto}.resource .meta{margin-top:auto}
+.implementation-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:50px}.implementation-card{padding:38px;background:white;border-top:3px solid var(--gold)}
+.implementation-card h3{font-size:2.3rem;margin:20px 0}.implementation-card p{color:#485a6c}.implementation-card .button{background:var(--navy);color:white;margin-top:12px}
+.status{padding:18px 20px;border-left:2px solid var(--gold);background:var(--paper);font-size:.95rem}.status strong{color:var(--navy)}
+.mission{background:var(--deep);color:#e5edf3;padding:32px;margin-top:28px}.mission p{color:inherit}.mission .kicker{color:var(--gold);margin-bottom:12px}
+.start-links{display:flex;flex-wrap:wrap;gap:18px;margin-top:20px}.start-links a{border-bottom:1px solid var(--gold);font-weight:700;font-size:.9rem}
+.footer{font-size:.875rem}.author .disclosure{font-size:1rem}.nav-links a:focus-visible,.button:focus-visible{outline-offset:5px}
+@media(max-width:1050px){.nav-links{gap:14px}.brand{font-size:.7rem}}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.implementation-grid{grid-template-columns:1fr}.nav{height:auto;min-height:76px;flex-wrap:wrap;padding:16px 0;gap:12px}.nav-links{display:flex;flex-wrap:wrap;gap:12px 20px}.hero-panel{max-width:600px}.stage-outcome{display:block;grid-column:2/3;border-left:0;padding-top:0}.arrow{grid-column:3;grid-row:1/3}.stage-no{grid-row:1/3}.split,.framework-grid{gap:32px}}
+@media(max-width:560px){.brand{font-size:.7rem}.nav-links a{font-size:.8rem}.hero-index{grid-template-columns:1fr 1fr}.hero-grid{padding-top:55px}.hero h1{font-size:clamp(2.7rem,12vw,3.6rem)}.hero-panel{padding:30px 24px;box-shadow:10px 10px 0 rgba(0,0,0,.16)}.lab-card{grid-template-columns:1fr;gap:14px}.implementation-card{padding:28px}.resource{min-height:0;gap:12px}.resource .button{margin-top:12px}.stage h3{font-size:1.5rem}.hero-panel h2{font-size:2.1rem}.author-grid{gap:35px}.section h2{font-size:2.65rem}.stage-outcome{padding-left:20px;padding-right:20px}.hero-index a:last-child{grid-column:1/-1}}
+</style></head><body>
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="topbar"><nav class="page nav" aria-label="Primary navigation"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">AR</span><span>AIAT · Autonomous Algorithmic Trading</span></a><div class="nav-links"><a href="#journey">Journey</a><a href="#texts">Texts</a><a href="#notebooks">Notebooks</a><a href="#implementation">Implementation</a><a href="#author">Author</a></div></nav></header>
+<main id="content"><section class="hero" id="top"><div class="page hero-grid"><div><p class="eyebrow">Four essential texts · Thirteen notebooks · One governed architecture</p><h1>Build the<br>institution.<br><em>Govern the<br>intelligence.</em></h1><p class="hero-lead">Autonomous algorithmic trading, from first principles to an invokable AI assistant.</p><p class="hero-body">A complete research and teaching journey through market data, machine learning, strategies, portfolios, execution, independent risk, and accountable autonomy.</p><div class="actions"><a class="button primary" href="#journey">Explore the journey ↓</a><a class="button secondary" href="https://github.com/alexdibol/ai_at_2027">Open the repository ↗</a></div></div><aside class="hero-panel" aria-label="Project overview"><p class="panel-kicker">The central question</p><h2>How does a research question become a system we can trust?</h2><div class="stats"><div><strong>400+</strong><span>Engineering tasks organized into a coherent program</span></div><div><strong>13</strong><span>Notebooks that make the method executable</span></div><div><strong>2</strong><span>Implementation routes: QuantConnect and the assistant</span></div></div></aside></div><div class="page hero-index" aria-label="The five stages"><a href="#method"><span>01</span>Define the institution</a><a href="#journey"><span>02</span>Organize the build</a><a href="#notebooks"><span>03</span>Execute the method</a><a href="#implementation"><span>04</span>Bridge to QuantConnect</a><a href="#assistant"><span>05</span>Invoke the assistant</a></div></section>
+<section class="section page" id="method"><div class="split"><div><p class="kicker">The architectural premise</p><h2>Intelligence needs<br>an institution.</h2></div><p class="intro">A prediction is only the beginning. A useful autonomous system must know which evidence it can trust, which procedures it may invoke, how to challenge a result, when to stop, and who remains responsible. This project makes those obligations part of the design.</p></div>
+<div class="principles"><article><span class="number">01</span><h3>Perceive</h3><p>Establish controlled data, point-in-time features, provenance, and reproducible evidence.</p></article><article><span class="number">02</span><h3>Reason</h3><p>Compare models and strategies. Use bounded LLM planning to select approved research capabilities.</p></article><article><span class="number">03</span><h3>Execute</h3><p>Translate proposals into portfolios and backtests with explicit costs, timing, and constraints.</p></article><article><span class="number">04</span><h3>Govern</h3><p>Preserve independent risk, falsification, audit, authority boundaries, and human judgment.</p></article></div></section>
+<section class="roadmap" id="journey"><div class="page"><div class="roadmap-head"><div><p class="kicker">The journey · Five transformations</p><h2>From 400 tasks<br>to an invokable<br>research institution.</h2></div><p>The project began as a formidable engineering inventory. Each transformation made it easier to understand, reproduce, and use—while preserving the discipline underneath.</p></div><div class="stages">
+<a class="stage" href="#texts"><div class="stage-no">01</div><div class="stage-main"><span class="stage-label">Define</span><h3>Map the complete system</h3><p>More than 400 tasks exposed the breadth of the challenge.</p></div><div class="stage-outcome"><strong>What this made possible</strong><p>A comprehensive design spanning quantitative methods, operations, controls, and accountability.</p></div><div class="arrow" aria-hidden="true">↓</div></a>
+<a class="stage" href="#texts"><div class="stage-no">02</div><div class="stage-main"><span class="stage-label">Organize</span><h3>Build in ten days</h3><p>An execution program made the engineering effort manageable.</p></div><div class="stage-outcome"><strong>What this made possible</strong><p>A documented diary, staged deliverables, and an installation-oriented implementation.</p></div><div class="arrow" aria-hidden="true">↓</div></a>
+<a class="stage" href="#notebooks"><div class="stage-no">03</div><div class="stage-main"><span class="stage-label">Teach</span><h3>Make the method executable</h3><p>The work became a cumulative notebook curriculum.</p></div><div class="stage-outcome"><strong>What this made possible</strong><p>Inspectable experiments, reusable capabilities, and an integrated autonomous research process.</p></div><div class="arrow" aria-hidden="true">↓</div></a>
+<a class="stage" href="#implementation"><div class="stage-no">04</div><div class="stage-main"><span class="stage-label">Translate</span><h3>Cross the platform boundary</h3><p>NB07 carries the research design into QuantConnect/LEAN.</p></div><div class="stage-outcome"><strong>What this made possible</strong><p>A governed specification becomes an event-driven research backtest project.</p></div><div class="arrow" aria-hidden="true">↓</div></a>
+<a class="stage" href="#assistant"><div class="stage-no">05</div><div class="stage-main"><span class="stage-label">Invoke</span><h3>Encode the research discipline</h3><p>The notebook methodology becomes an assistant operating specification.</p></div><div class="stage-outcome"><strong>What this made possible</strong><p>Canonical instructions, states, evidence gates, installation files, and a runtime scaffold.</p></div><div class="arrow" aria-hidden="true">↓</div></a>
+</div></div></section><section class="section resources" id="texts"><div class="page"><div class="split"><div><p class="kicker">The reading collection</p><h2>Four texts.<br>One cumulative argument.</h2></div><p class="intro">Enter through the conceptual overview, follow the executable methodology, then explore the two implementation bridges. Each text addresses a different question in the same architecture.</p></div><div class="resource-grid">
+<article class="resource "><span class="tag">Book · The foundation</span><h3>Think. Build.<br>Use and improve.</h3><p>The complete conceptual overview of an autonomous algorithmic trading system, connecting traditional quantitative finance with tools, skills, agents, governance, and the ten-day engineering record.</p><p class="meta">Architecture · Methods · Engineering diary</p><a class="button" href="https://github.com/alexdibol/ai_at_2027/blob/main/1_COURSE_BOOK_AUTONOMOUS_ALGO_TRADING.pdf">Read the book ↗</a></article>
+<article class="resource dark"><span class="tag">Paper · The methodology</span><h3>Building an autonomous quantitative research system</h3><p>A pedagogical explanation of NB00–NB10: why each notebook exists, how its methods work, and what it contributes to the institution.</p><p class="meta">Objectives · Methods · Executable evidence</p><a class="button" href="https://github.com/alexdibol/ai_at_2027/blob/main/2_COLAB%20NOTEBOOKS%20AUTONOMOUS%20ALGO%20TRADING.pdf">Read the notebook paper ↗</a></article>
+<article class="resource dark"><span class="tag">Paper · The platform bridge</span><h3>From research<br>to QuantConnect / LEAN</h3><p>A thorough analysis of NB07 and the translation from Colab research to event-driven execution, including model competition, portfolio construction, risk, and reconciliation.</p><p class="meta">Semantic compilation · Platform mechanics</p><a class="button" href="https://github.com/alexdibol/ai_at_2027/blob/main/3_QUANTCONNECT%20IMPLEMENTATION%20AUTONOMOUS%20ALGO%20TRADING.pdf">Read the QuantConnect paper ↗</a></article>
+<article class="resource "><span class="tag">Paper · The assistant</span><h3>From notebooks<br>to a governed assistant</h3><p>The final transition: preserve the research discipline in an invokable assistant, with a canonical specification, a worked mission example, and detailed installation guidance.</p><p class="meta">Agent design · State machine · Installation</p><a class="button" href="https://github.com/alexdibol/ai_at_2027/blob/main/4_AUTONOMOUS%20ASSISTANT%20ALGO%20TRADING.pdf">Read the assistant paper ↗</a></article>
+</div></div></section><section class="section labs" id="notebooks"><div class="page"><div class="split"><div><p class="kicker">The executable collection · 13 notebooks</p><h2>Learn the system<br>by building it.</h2></div><p class="intro">Begin with NB00A, NB00, and NB00B. Continue through NB01–NB06, then NB08–NB10. Study NB07 separately after the integrated research sequence, so platform engineering does not interrupt the learning progression.</p></div>
+<div class="lab-group"><div class="lab-group-head"><span>01 · Foundations</span><h3>Establish the world and the first complete decision</h3></div><div class="lab-grid">
+<article class="lab-card"><span class="lab-number">NB00A</span><div><h3>Autonomous Systems Protocol</h3><p>Define the constitution, schemas, permissions, evidence, and authority boundaries.</p><div class="lab-links"><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB00A_Autonomous_Systems_Protocol_github.ipynb">Read notebook ↗</a><a class="" href="https://colab.research.google.com/github/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB00A_Autonomous_Systems_Protocol_github.ipynb">Open in Colab ↗</a></div></div></article>
+<article class="lab-card"><span class="lab-number">NB00</span><div><h3>Synthetic Equity Market Engine</h3><p>Create a reproducible market with regimes, sectors, corporate actions, and known data defects.</p><div class="lab-links"><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB00_Synthetic_Equity_Market_Engine_github.ipynb">Read notebook ↗</a><a class="" href="https://colab.research.google.com/github/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB00_Synthetic_Equity_Market_Engine_github.ipynb">Open in Colab ↗</a></div></div></article>
+<article class="lab-card"><span class="lab-number">NB00B</span><div><h3>Minimal KNN Vertical Slice</h3><p>Follow one complete chain from governed data to predictions, positions, costs, stress, and audit.</p><div class="lab-links"><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB00B_Minimal_KNN_Vertical_Slice_github.ipynb">Read notebook ↗</a><a class="" href="https://colab.research.google.com/github/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB00B_Minimal_KNN_Vertical_Slice_github.ipynb">Open in Colab ↗</a></div></div></article>
+</div></div>
+<div class="lab-group"><div class="lab-group-head"><span>02 · Capabilities</span><h3>From quantitative methods to a coordinated institution</h3></div><div class="lab-grid">
+<article class="lab-card"><span class="lab-number">NB01</span><div><h3>Models, Strategies, and Portfolios</h3><p>Compare heterogeneous models, trading rules, and portfolio methods under common evaluation discipline.</p><div class="lab-links"><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB01_Model_Strategy_portfolio_Lab_github.ipynb">Read notebook ↗</a><a class="" href="https://colab.research.google.com/github/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB01_Model_Strategy_portfolio_Lab_github.ipynb">Open in Colab ↗</a></div></div></article>
+<article class="lab-card"><span class="lab-number">NB02</span><div><h3>Execution, Risk, and Audit</h3><p>Introduce simulated orders and fills, reconciliation, implementation costs, stress, and independent risk.</p><div class="lab-links"><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB02_Execution_Risk_Governance_Audit_github.ipynb">Read notebook ↗</a><a class="" href="https://colab.research.google.com/github/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB02_Execution_Risk_Governance_Audit_github.ipynb">Open in Colab ↗</a></div></div></article>
+<article class="lab-card"><span class="lab-number">NB03</span><div><h3>Tools, Skills, and Bounded Agents</h3><p>Package analytical functions as discoverable capabilities with explicit contracts and permissions.</p><div class="lab-links"><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB03_Tool_Skill_Agent_Factory_github.ipynb">Read notebook ↗</a><a class="" href="https://colab.research.google.com/github/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB03_Tool_Skill_Agent_Factory_github.ipynb">Open in Colab ↗</a></div></div></article>
+<article class="lab-card"><span class="lab-number">NB04</span><div><h3>Governed Agent Constellations</h3><p>Coordinate research, strategy, portfolio, and risk roles while preserving responsibility and dissent.</p><div class="lab-links"><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB04_Governed_Agent_Constellations_github.ipynb">Read notebook ↗</a><a class="" href="https://colab.research.google.com/github/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB04_Governed_Agent_Constellations_github.ipynb">Open in Colab ↗</a></div></div></article>
+<article class="lab-card"><span class="lab-number">NB05</span><div><h3>The Governed Meta-Agent</h3><p>Decompose missions, discover approved capabilities, route work, and manage bounded resources.</p><div class="lab-links"><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB05_Governed_Meta_Agent_github.ipynb">Read notebook ↗</a><a class="" href="https://colab.research.google.com/github/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB05_Governed_Meta_Agent_github.ipynb">Open in Colab ↗</a></div></div></article>
+<article class="lab-card"><span class="lab-number">NB06</span><div><h3>The Closed-Loop System</h3><p>Integrate admission, dynamic planning, execution, monitoring, recovery, and audit closure.</p><div class="lab-links"><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB06_Autonomous_System_Release_Candidate_github.ipynb">Read notebook ↗</a><a class="" href="https://colab.research.google.com/github/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB06_Autonomous_System_Release_Candidate_github.ipynb">Open in Colab ↗</a></div></div></article>
+</div></div>
+<div class="lab-group"><div class="lab-group-head"><span>03 · Integration</span><h3>Bring quantitative tools and LLM reasoning together</h3></div><div class="lab-grid">
+<article class="lab-card"><span class="lab-number">NB08</span><div><h3>Integrated Quantitative Research</h3><p>Connect actual model execution, strategy comparisons, portfolios, and risk to dynamic orchestration.</p><div class="lab-links"><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB08_Integrated_Autonomous_Quantitative_Research_System_github.ipynb">Read notebook ↗</a><a class="" href="https://colab.research.google.com/github/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB08_Integrated_Autonomous_Quantitative_Research_System_github.ipynb">Open in Colab ↗</a></div></div></article>
+<article class="lab-card"><span class="lab-number">NB09</span><div><h3>The Bounded LLM Control Plane</h3><p>Add real language-model planning and evidence critique around deterministic quantitative execution.</p><div class="lab-links"><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB09_LLM_Governed_Autonomous_Quantitative_Research_System_github.ipynb">Read notebook ↗</a><a class="" href="https://colab.research.google.com/github/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB09_LLM_Governed_Autonomous_Quantitative_Research_System_github.ipynb">Open in Colab ↗</a></div></div></article>
+<article class="lab-card"><span class="lab-number">NB10</span><div><h3>The Capstone Institution</h3><p>Rejoin the canonical data contract with integrated research, LLM reasoning, stress, and adversarial tests.</p><div class="lab-links"><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB10_Capstone_%20github.ipynb">Read notebook ↗</a><a class="" href="https://colab.research.google.com/github/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB10_Capstone_%20github.ipynb">Open in Colab ↗</a></div></div></article>
+</div></div>
+<div class="lab-group"><div class="lab-group-head"><span>04 · Platform bridge</span><h3>Preserve the method inside QuantConnect</h3></div><div class="lab-grid">
+<article class="lab-card"><span class="lab-number">NB07</span><div><h3>The QuantConnect / LEAN Bridge</h3><p>Translate the research specification into an event-driven backtest with costs, independent risk, and provenance.</p><div class="lab-links"><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB07_QuantConnect_LEAN_Governed_Implementation_Bridge_github.ipynb">Read notebook ↗</a><a class="" href="https://colab.research.google.com/github/alexdibol/ai_at_2027/blob/main/colab_notebooks/NB07_QuantConnect_LEAN_Governed_Implementation_Bridge_github.ipynb">Open in Colab ↗</a></div></div></article>
+</div></div>
+</div></section><section class="section framework" id="governance"><div class="page framework-grid"><div><p class="kicker">The discipline that survives</p><h2>Autonomy within<br>an explicit<br>mandate.</h2></div><div><blockquote>The LLM proposes and interprets. Quantitative tools calculate. Independent risk challenges. Governance constrains. Humans decide.</blockquote><div class="duties"><div class="duty"><strong>Evidence before claims</strong><span>Keep data, assumptions, configurations, and results traceable. Missing evidence remains missing.</span></div><div class="duty"><strong>Authority before action</strong><span>A planner may choose approved tools; it cannot grant itself new permissions.</span></div><div class="duty"><strong>Challenge before promotion</strong><span>Stress, falsification, and independent risk determine what survives the research process.</span></div><div class="duty"><strong>Accountability throughout</strong><span>Research completion, platform validation, and deployment authorization remain separate decisions.</span></div></div></div></div></section>
+<section class="section resources" id="implementation"><div class="page"><div class="split"><div><p class="kicker">Two implementation routes</p><h2>Take the method<br>into practice.</h2></div><p class="intro">Use the platform package to study the generated backtest. Use the assistant bundle to install the research workflow or develop its executable runtime. The available evidence and remaining integration work are explicit.</p></div>
+<div class="implementation-grid"><article class="implementation-card"><span class="stage-label">Route 01 · QuantConnect / LEAN</span><h3>From specification<br>to platform behavior.</h3><p>A reference implementation with 30 U.S. equities, five competing model families, monthly training, cross-sectional long/short signals, portfolio constraints, and audit artifacts.</p><p>Start with the package guide, add the supplied algorithm and configuration to a QuantConnect Python project, and run a backtest. Reconcile platform behavior with the research contract.</p><div class="status"><strong>Current evidence</strong><br>Local checks are recorded as passed. QuantConnect compilation and backtesting are recorded as NOT_RUN. Live mode is denied.</div><a class="button" href="https://github.com/alexdibol/ai_at_2027/tree/main/quantconnect_code">Explore the QuantConnect package ↗</a><div class="start-links"><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/quantconnect_code/README_QUANTCONNECT.md">Installation guide</a><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/quantconnect_code/validation_report.json">Validation report</a></div></article>
+<article class="implementation-card" id="assistant"><span class="stage-label">Route 02 · The governed assistant</span><h3>State the mission.<br>Preserve the discipline.</h3><p>Canonical instructions and knowledge files establish the ChatGPT workflow. States S0–S11 connect mission admission, research evidence, independent risk, critique, LEAN packaging, and audit closure.</p><p>Follow the installation manifest and acceptance tests. Developers can extend the accompanying Python runtime with validated notebook capabilities.</p><div class="status"><strong>Current implementation</strong><br>The ChatGPT bundle provides procedural guidance. The Python runtime is a scaffold: quantitative handlers and an operational LLM adapter still require integration.</div><a class="button" href="https://github.com/alexdibol/ai_at_2027/tree/main/autonomous_agent">Explore the assistant bundle ↗</a><div class="start-links"><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/autonomous_agent/01_CHATGPT_INSTALLATION/INSTALL_CHATGPT.md">ChatGPT installation</a><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/autonomous_agent/06_VALIDATION_AND_TESTS/CHATGPT_ACCEPTANCE_TESTS.md">Acceptance tests</a></div></article></div>
+<div class="mission"><p class="kicker">An illustrative first mission</p><p>“AIAT mission: compare a 20-day momentum rule with approved predictive models in the governed synthetic-equity universe. Preserve chronological validation, transaction costs, independent risk, and audit evidence. First identify the current state, missing artifacts, and the next permissible transition. Live authority: none.”</p></div></div></section>
+<section class="section page experience" id="start"><div class="split"><div><p class="kicker">Choose your starting point</p><h2>One collection.<br>Several ways in.</h2></div><p class="intro">The materials support conceptual study, hands-on experimentation, platform implementation, and assistant development. Start with the question you want to answer.</p></div><div class="cycle">
+<article><span>01</span><h3>Understand</h3><p>Study the complete conceptual architecture and the reasoning behind its controls.</p><div class="start-links"><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/1_COURSE_BOOK_AUTONOMOUS_ALGO_TRADING.pdf">Start with the book ↗</a></div></article>
+<article><span>02</span><h3>Experiment</h3><p>Execute the notebooks and inspect the assumptions and evidence at each stage.</p><div class="start-links"><a class="" href="#notebooks">Explore the notebooks ↗</a></div></article>
+<article><span>03</span><h3>Implement</h3><p>Understand how a governed research design maps to event-driven platform behavior.</p><div class="start-links"><a class="" href="#implementation">Study the bridge ↗</a></div></article>
+<article><span>04</span><h3>Invoke</h3><p>Install the conversational workflow and test whether it preserves the methodology.</p><div class="start-links"><a class="" href="#assistant">Set up the assistant ↗</a></div></article>
+</div></section><section class="section author" id="author"><div class="page author-grid"><div class="author-mark" aria-hidden="true"><span>AR</span></div><div><p class="kicker">Intellectual and academic direction</p><h2>Alejandro Reynoso</h2><p>This project brings quantitative finance, machine learning, software architecture, autonomous systems, and institutional governance into one cumulative research and teaching program.</p><p>Its ambition is to make the entire process understandable and inspectable: from the first research question to the evidence that supports an implementation decision.</p><p class="disclosure"><strong>AI-assisted, human-led.</strong> AI tools were used at various stages, including research assistance, coding, debugging, writing, editing, and explanatory material. Intellectual direction, guidance, methodological choices, editorial judgment, and responsibility remain with Alejandro Reynoso and any explicitly credited human co-authors for their contributions.</p><p class="disclosure"><strong>Research and education.</strong> Synthetic-market results do not establish a real-market investment edge. The supplied architecture denies live-trading authority. The repository is released under the MIT License; third-party materials retain their respective licenses.</p></div></div></section></main><footer class="footer"><div class="page footer-grid"><div><strong>AIAT · Autonomous Algorithmic Trading</strong><br>© 2026 Alejandro Reynoso · Research and education</div><div><a class="" href="https://github.com/alexdibol/ai_at_2027">GitHub ↗</a><a class="" href="https://github.com/alexdibol/ai_at_2027/blob/main/LICENSE">MIT License ↗</a><a class="" href="#top">Back to top ↑</a></div></div></footer></body></html>
